@@ -3,10 +3,10 @@
 .book-table-container {
     width: 100%;
     overflow-x: auto;
-    background: var(--surface-card);
+    background: var(--color-bg-secondary);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-separator);
+    box-shadow: var(--shadow-card);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -14,26 +14,27 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    min-width: 600px; /* Ensure horizontal scrolling on small screens */
+    min-width: 600px;
+    /* Ensure horizontal scrolling on small screens */
 }
 
 .book-table__th {
-    padding: var(--spacing-md) var(--spacing-lg);
-    background: var(--surface-bg);
-    color: var(--text-secondary);
-    font-size: var(--font-sm);
+    padding: var(--spacing-base) var(--spacing-lg);
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     cursor: pointer;
     user-select: none;
     transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
-    border-bottom: 2px solid var(--border-light);
+    border-bottom: 2px solid var(--color-separator);
 }
 
 .book-table__th:hover {
-    background: var(--surface-hover);
-    color: var(--text-primary);
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
 }
 
 .book-table__row {
@@ -41,18 +42,23 @@
     cursor: pointer;
 }
 
-.book-table__row:hover {
-    background: var(--surface-hover);
+.book-table__row:nth-child(even) {
+    background-color: var(--color-bg-primary);
+}
+
+.book-table__row:hover,
+.book-table__row:nth-child(even):hover {
+    background-color: var(--color-bg-elevated);
 }
 
 .book-table__row:not(:last-child) {
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--color-separator);
 }
 
 .book-table__td {
-    padding: var(--spacing-md) var(--spacing-lg);
-    font-size: var(--font-base);
-    color: var(--text-primary);
+    padding: var(--spacing-base) var(--spacing-lg);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
     vertical-align: middle;
 }
 
@@ -61,7 +67,7 @@
 }
 
 .book-table__td:nth-child(2) {
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
 }
 
 .book-table__td--center {
@@ -70,7 +76,7 @@
 
 .book-table__td--right {
     text-align: right;
-    color: var(--text-tertiary);
+    color: var(--color-text-tertiary);
     font-family: monospace;
-    font-size: var(--font-sm);
+    font-size: var(--font-size-sm);
 }

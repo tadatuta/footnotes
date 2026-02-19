@@ -7,6 +7,7 @@ import './styles/blocks/header.css';
 import './styles/blocks/avatar.css';
 import './styles/blocks/nav.css';
 import './styles/blocks/book-card.css';
+import './styles/blocks/book-table.css';
 import './styles/blocks/rating.css';
 import './styles/blocks/search.css';
 import './styles/blocks/book-form.css';
