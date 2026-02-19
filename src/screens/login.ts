@@ -1,6 +1,6 @@
 /* ===== Footnotes — Login Screen ===== */
 
-import { IS_DEV, TELEGRAM_BOT_ID } from '../config';
+import { IS_DEV, TELEGRAM_BOT_USERNAME } from '../config';
 import { initTelegramLoginWidget, onTelegramAuth } from '../auth';
 import { createLogger } from '../logger';
 
@@ -35,7 +35,7 @@ export function renderLoginScreen(container: HTMLElement): void {
     const widgetContainer = document.createElement('div');
     widgetContainer.className = 'login__widget';
 
-    if (TELEGRAM_BOT_ID) {
+    if (TELEGRAM_BOT_USERNAME) {
         initTelegramLoginWidget(widgetContainer);
     } else {
         const noBot = document.createElement('p');

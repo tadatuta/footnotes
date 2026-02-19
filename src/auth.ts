@@ -1,6 +1,6 @@
 /* ===== Footnotes — Telegram Auth ===== */
 
-import { IS_DEV, TELEGRAM_BOT_ID } from './config';
+import { IS_DEV, TELEGRAM_BOT_USERNAME } from './config';
 import { createLogger } from './logger';
 import type { TelegramLoginUser } from './types';
 
@@ -40,7 +40,7 @@ function isSessionValid(user: TelegramLoginUser): boolean {
 
 /** Get currently authenticated user */
 export function getCurrentUser(): TelegramLoginUser | null {
-    if (IS_DEV && !TELEGRAM_BOT_ID) {
+    if (IS_DEV && !TELEGRAM_BOT_USERNAME) {
         log.debug('Dev mode: returning mock user');
         return {
             id: 12345,
@@ -86,7 +86,7 @@ export function onTelegramAuth(user: TelegramLoginUser): void {
 
 /** Initialize Telegram Login Widget in the given container */
 export function initTelegramLoginWidget(container: HTMLElement): void {
-    if (!TELEGRAM_BOT_ID) {
+    if (!TELEGRAM_BOT_USERNAME) {
         log.warn('Telegram Bot ID not configured, login widget not rendered');
         return;
     }
@@ -97,7 +97,7 @@ export function initTelegramLoginWidget(container: HTMLElement): void {
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://telegram.org/js/telegram-widget.js?22';
-    script.setAttribute('data-telegram-login', TELEGRAM_BOT_ID);
+    script.setAttribute('data-telegram-login', TELEGRAM_BOT_USERNAME);
     script.setAttribute('data-size', 'large');
     script.setAttribute('data-radius', '12');
     script.setAttribute('data-onauth', 'onTelegramAuth(user)');
