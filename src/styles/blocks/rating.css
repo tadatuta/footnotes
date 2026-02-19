@@ -1,0 +1,48 @@
+/* ===== Rating Block ===== */
+
+.rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.rating--interactive {
+    gap: var(--spacing-xs);
+}
+
+.rating__star {
+    color: var(--color-star-empty);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    line-height: 1;
+}
+
+.rating__star--filled {
+    color: var(--color-star);
+}
+
+.rating__star svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+.rating--interactive .rating__star {
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.rating--interactive .rating__star svg {
+    width: 28px;
+    height: 28px;
+}
+
+.rating--interactive .rating__star:active {
+    transform: scale(1.2);
+}
+
+.rating__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-left: var(--spacing-xs);
+}

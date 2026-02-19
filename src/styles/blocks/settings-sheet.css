@@ -1,0 +1,109 @@
+/* ===== Settings Sheet Block ===== */
+
+.settings-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.settings-sheet--open {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.settings-sheet__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-bg-overlay);
+}
+
+.settings-sheet__content {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg-elevated);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding-bottom: var(--safe-area-bottom);
+    transform: translateY(100%);
+    transition: transform var(--transition-slow);
+}
+
+.settings-sheet--open .settings-sheet__content {
+    transform: translateY(0);
+}
+
+.settings-sheet__handle {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-md) 0 var(--spacing-sm);
+}
+
+.settings-sheet__handle::after {
+    content: '';
+    width: 36px;
+    height: 5px;
+    background-color: var(--color-text-tertiary);
+    border-radius: var(--radius-full);
+}
+
+.settings-sheet__title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+    padding-bottom: var(--spacing-md);
+}
+
+.settings-sheet__list {
+    padding: 0 var(--spacing-base) var(--spacing-xl);
+}
+
+.settings-sheet__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-base);
+    background-color: var(--color-bg-secondary);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--transition-fast);
+}
+
+.settings-sheet__item:first-child {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.settings-sheet__item:last-child {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.settings-sheet__item:only-child {
+    border-radius: var(--radius-md);
+}
+
+.settings-sheet__item+.settings-sheet__item {
+    border-top: 0.5px solid var(--color-separator);
+}
+
+.settings-sheet__item:active {
+    background-color: var(--color-bg-tertiary);
+}
+
+.settings-sheet__item--active {
+    color: var(--color-accent);
+}
+
+.settings-sheet__check {
+    color: var(--color-accent);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    opacity: 0;
+}
+
+.settings-sheet__item--active .settings-sheet__check {
+    opacity: 1;
+}

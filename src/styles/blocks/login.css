@@ -1,0 +1,38 @@
+/* ===== Login Block ===== */
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: var(--spacing-xxl);
+    text-align: center;
+    gap: var(--spacing-xxl);
+}
+
+.login__logo {
+    font-size: 64px;
+    line-height: 1;
+}
+
+.login__title {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.3px;
+}
+
+.login__subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    max-width: 280px;
+}
+
+.login__widget {
+    margin-top: var(--spacing-lg);
+}
+
+.login__dev-button {
+    margin-top: var(--spacing-md);
+}

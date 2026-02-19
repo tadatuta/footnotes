@@ -1,0 +1,50 @@
+/* ===== Button Block ===== */
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 var(--spacing-xl);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    transition: background-color var(--transition-fast), opacity var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button:active {
+    opacity: 0.7;
+}
+
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.button--primary {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+}
+
+.button--primary:hover {
+    background-color: var(--color-accent-hover);
+}
+
+.button--secondary {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+}
+
+.button--destructive {
+    background-color: transparent;
+    color: var(--color-destructive);
+}
+
+.button--destructive:hover {
+    background-color: rgba(255, 59, 48, 0.08);
+}
+
+.button--full-width {
+    width: 100%;
+}
