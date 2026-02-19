@@ -11,6 +11,7 @@ let state: AppState = {
     sortField: 'createdAt',
     sortDirection: 'desc',
     searchQuery: '',
+    viewMode: 'list',
 };
 
 const subscribers: Set<StateSubscriber> = new Set();
@@ -77,6 +78,13 @@ export function setSort(field: SortField, direction: SortDirection): void {
 /** Set search query */
 export function setSearchQuery(query: string): void {
     state = { ...state, searchQuery: query };
+    notify();
+}
+
+/** Set view mode */
+export function setViewMode(viewMode: 'list' | 'table'): void {
+    log.debug(`Setting view mode: ${viewMode}`);
+    state = { ...state, viewMode };
     notify();
 }
 

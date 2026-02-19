@@ -40,6 +40,7 @@ export interface AppState {
     sortField: SortField;
     sortDirection: SortDirection;
     searchQuery: string;
+    viewMode: 'list' | 'table';
 }
 
 export type StateSubscriber = (state: AppState) => void;

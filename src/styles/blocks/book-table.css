@@ -1,0 +1,76 @@
+/* ===== Footnotes — Book Table Block ===== */
+
+.book-table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px; /* Ensure horizontal scrolling on small screens */
+}
+
+.book-table__th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--surface-bg);
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.book-table__th:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+.book-table__row {
+    transition: background-color var(--transition-fast) ease;
+    cursor: pointer;
+}
+
+.book-table__row:hover {
+    background: var(--surface-hover);
+}
+
+.book-table__row:not(:last-child) {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.book-table__td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-base);
+    color: var(--text-primary);
+    vertical-align: middle;
+}
+
+.book-table__td:nth-child(1) {
+    font-weight: 500;
+}
+
+.book-table__td:nth-child(2) {
+    color: var(--text-secondary);
+}
+
+.book-table__td--center {
+    text-align: center;
+}
+
+.book-table__td--right {
+    text-align: right;
+    color: var(--text-tertiary);
+    font-family: monospace;
+    font-size: var(--font-sm);
+}
