@@ -1,11 +1,43 @@
 /* ===== Footnotes — API Client ===== */
 
 import { API_URL } from './config';
-import { getAuthHeader } from './auth';
+import { getAuthHeader, logout } from './auth';
 import { createLogger } from './logger';
+import { navigateTo } from './router';
 import type { UserData } from './types';
 
 const log = createLogger('api');
+let unauthorizedHandled = false;
+
+export class ApiError extends Error {
+    readonly status: number;
+    readonly body: string;
+
+    constructor(status: number, body: string) {
+        super(`API error: ${status}${body ? ` ${body}` : ''}`);
+        this.name = 'ApiError';
+        this.status = status;
+        this.body = body;
+    }
+}
+
+export function isUnauthorizedError(error: unknown): boolean {
+    if (error instanceof ApiError) {
+        return error.status === 401 || /unauthorized/i.test(error.body);
+    }
+
+    return error instanceof Error && /unauthorized/i.test(error.message);
+}
+
+function handleUnauthorized(): void {
+    if (unauthorizedHandled) return;
+    unauthorizedHandled = true;
+
+    log.warn('Unauthorized response received, clearing session');
+    logout();
+    navigateTo({ name: 'login' });
+    window.location.reload();
+}
 
 async function request<T>(method: string, body?: unknown): Promise<T> {
     const url = API_URL;
@@ -29,8 +61,14 @@ async function request<T>(method: string, body?: unknown): Promise<T> {
 
     if (!response.ok) {
         const errorText = await response.text();
+        const apiError = new ApiError(response.status, errorText);
+
+        if (isUnauthorizedError(apiError)) {
+            handleUnauthorized();
+        }
+
         log.error(`API error ${response.status}`, errorText);
-        throw new Error(`API error: ${response.status} ${errorText}`);
+        throw apiError;
     }
 
     const data = await response.json() as T;
@@ -46,6 +84,10 @@ export async function loadUserData(): Promise<UserData> {
         log.info(`Loaded ${data.books?.length ?? 0} books`);
         return data;
     } catch (e) {
+        if (isUnauthorizedError(e)) {
+            throw e;
+        }
+
         log.error('Failed to load user data', e);
         return { books: [] };
     }

@@ -4,7 +4,7 @@ import { renderHeader } from '../components/header';
 import { renderNav } from '../components/nav';
 import { renderBookForm } from '../components/book-form';
 import { getBookById, updateBook, deleteBook, getState } from '../store';
-import { saveUserData } from '../api';
+import { saveUserData, isUnauthorizedError } from '../api';
 import { navigateTo } from '../router';
 import { createLogger } from '../logger';
 
@@ -56,6 +56,11 @@ export function renderEditBookScreen(container: HTMLElement, bookId: string): vo
                 const state = getState();
                 await saveUserData({ books: state.books });
             } catch (e) {
+                if (isUnauthorizedError(e)) {
+                    log.warn('Stopping edit flow due to unauthorized session');
+                    return;
+                }
+
                 log.error('Failed to save to backend', e);
             }
 
@@ -70,6 +75,11 @@ export function renderEditBookScreen(container: HTMLElement, bookId: string): vo
                 const state = getState();
                 await saveUserData({ books: state.books });
             } catch (e) {
+                if (isUnauthorizedError(e)) {
+                    log.warn('Stopping delete flow due to unauthorized session');
+                    return;
+                }
+
                 log.error('Failed to save to backend', e);
             }
 

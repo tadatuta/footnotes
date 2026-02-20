@@ -19,7 +19,7 @@ import './styles/blocks/screen.css';
 
 // Modules
 import { isAuthenticated, getCurrentUser } from './auth';
-import { loadUserData } from './api';
+import { loadUserData, isUnauthorizedError } from './api';
 import { setBooks, setUser } from './store';
 import { initRouter, navigateTo } from './router';
 import { createLogger } from './logger';
@@ -63,6 +63,11 @@ async function init(): Promise<void> {
         setBooks(data.books || []);
         log.info(`Loaded ${data.books?.length ?? 0} books from backend`);
     } catch (e) {
+        if (isUnauthorizedError(e)) {
+            log.info('Initial load aborted due to unauthorized session');
+            return;
+        }
+
         log.error('Failed to load initial data', e);
         setBooks([]);
     }

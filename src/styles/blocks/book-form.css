@@ -13,6 +13,47 @@
     gap: var(--spacing-sm);
 }
 
+.book-form__cover {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 2 / 3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-bg-secondary);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-form__cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-form__cover-placeholder {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.book-form__cover-remove {
+    color: var(--color-destructive);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    align-self: flex-start;
+    padding: 0 var(--spacing-base);
+}
+
+.book-form__cover-remove:hover {
+    opacity: 0.8;
+}
+
+.book-form__cover-remove:active {
+    opacity: 0.6;
+}
+
 .book-form__label {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);

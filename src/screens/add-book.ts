@@ -4,7 +4,7 @@ import { renderHeader } from '../components/header';
 import { renderNav } from '../components/nav';
 import { renderBookForm } from '../components/book-form';
 import { addBook, updateBook, getState } from '../store';
-import { saveUserData } from '../api';
+import { saveUserData, isUnauthorizedError } from '../api';
 import { fetchBookCover } from '../google-books';
 import { navigateTo } from '../router';
 import { createLogger } from '../logger';
@@ -42,12 +42,10 @@ export function renderAddBookScreen(container: HTMLElement): void {
         mode: 'create',
         onSubmit: async (data) => {
             const id = crypto.randomUUID();
-            const createdAt = new Date().toISOString();
 
             const newBook: Book = {
                 ...data,
                 id,
-                createdAt,
             };
 
             log.info(`Creating book: "${newBook.title}"`);
@@ -58,6 +56,11 @@ export function renderAddBookScreen(container: HTMLElement): void {
                 const state = getState();
                 await saveUserData({ books: state.books });
             } catch (e) {
+                if (isUnauthorizedError(e)) {
+                    log.warn('Stopping add-book flow due to unauthorized session');
+                    return;
+                }
+
                 log.error('Failed to save to backend', e);
             }
 
@@ -69,6 +72,11 @@ export function renderAddBookScreen(container: HTMLElement): void {
                     // Save updated data
                     const state = getState();
                     saveUserData({ books: state.books }).catch((err: unknown) => {
+                        if (isUnauthorizedError(err)) {
+                            log.warn('Skipping cover save due to unauthorized session');
+                            return;
+                        }
+
                         log.error('Failed to save cover update', err);
                     });
                 }
